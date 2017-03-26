@@ -12,7 +12,6 @@ window.renderStatistics = function (ctx, names, times) {
   ctx.fillText('Список результатов:', 222, 50);
 
   var maxTime = -1;
-  var maxIndex = -1;
   for (var i = 0; i < times.length; i++) {
     var time = times[i];
     if (time > maxTime) {
@@ -28,8 +27,8 @@ window.renderStatistics = function (ctx, names, times) {
   var initialX = 210;
   var initialY = 100;
   var nameInitialY = 20;
-  for (var i = 0; i < times.length; i++) {
-    if (names[i] == "Вы") {
+  for (var result = 0; result < times.length; result++) {
+    if (names[i] === 'Вы') {
       ctx.fillStyle = 'rgba(255, 0, 0, 1)';
     } else {
       ctx.fillStyle = 'rgba(0, 0, 255,' + Math.random() + ')';
@@ -38,4 +37,4 @@ window.renderStatistics = function (ctx, names, times) {
     ctx.fillRect(initialX + indent * i, histogramHeight - times[i] * step + initialY, barWidth, times[i] * step);
     ctx.fillText(names[i], initialX + indent * i, histogramHeight + initialY + nameInitialY);
   }
-}
+};
