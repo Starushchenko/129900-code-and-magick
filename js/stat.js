@@ -16,7 +16,6 @@ window.renderStatistics = function (ctx, names, times) {
     var time = times[i];
     if (time > maxTime) {
       maxTime = time;
-      maxIndex = i;
     }
   }
 
