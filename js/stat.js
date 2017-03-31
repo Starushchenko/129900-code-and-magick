@@ -42,18 +42,15 @@ var drawHistogramBar = function (ctx, playerName, resultTime, timesCollection, i
   } else {
     ctx.fillStyle = 'rgba(0, 0, 255,' + randomOpacity(0.1, 1) + ')';
   }
-  ctx.fillText(Math.round(resultTime), positionX , timePositionY);
+  ctx.fillText(Math.round(resultTime), positionX, timePositionY);
   ctx.fillRect(positionX, barPositionY, barWidth, barHeight);
   ctx.fillText(playerName, positionX, namePositionY);
-}
-
-
+};
 
 window.renderStatistics = function (ctx, names, times) {
 
   drawCloud(ctx);
   drawText(ctx);
-
 
   for (var i = 0; i < times.length; i++) {
     drawHistogramBar(ctx, names[i], times[i], times, i);
