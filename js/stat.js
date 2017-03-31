@@ -18,36 +18,44 @@ var calcMaxTime = function (times) {
   return Math.max.apply(Math, times);
 };
 
+
 var randomOpacity = function (min, max) {
   return Math.random() * (max - min) + min;
 };
 
-var drawHistogramBar = function (ctx, names, times) {
-  var histogramHeight = 150;
-  var step = histogramHeight / (calcMaxTime(times) - 0);
-  var barWidth = 40;
-  var indent = 50;
-  var initialX = 210;
-  var initialY = 100;
-  var nameInitialY = 20;
-  var i;
+var drawHistogramBar = function (ctx, playerName, resultTime, timesCollection, index) {
 
-  if (names[i] === 'Вы') {
+  var histogramHeight = 150;
+  var step = histogramHeight / (calcMaxTime(timesCollection) - 0);
+//  var step = 1;
+  var indent = 50;
+//  var positionX = 210 + indent * i;
+  var positionX = 210 + indent * index;
+  var timePositionY = 220 - resultTime * step;
+  var barPositionY = histogramHeight - resultTime * step + 100;
+  var namePositionY = histogramHeight + 120;
+  var barWidth = 40;
+  var barHeight = resultTime * step;
+
+  if (playerName === 'Вы') {
     ctx.fillStyle = 'rgba(255, 0, 0, 1)';
   } else {
     ctx.fillStyle = 'rgba(0, 0, 255,' + randomOpacity(0.1, 1) + ')';
   }
-  ctx.fillText(Math.round(times[i]), initialX + indent * i, histogramHeight - times[i] * step + 75);
-  ctx.fillRect(initialX + indent * i, histogramHeight - times[i] * step + initialY, barWidth, times[i] * step);
-  ctx.fillText(names[i], initialX + indent * i, histogramHeight + initialY + nameInitialY);
-};
+  ctx.fillText(Math.round(resultTime), positionX , timePositionY);
+  ctx.fillRect(positionX, barPositionY, barWidth, barHeight);
+  ctx.fillText(playerName, positionX, namePositionY);
+}
+
+
 
 window.renderStatistics = function (ctx, names, times) {
 
   drawCloud(ctx);
   drawText(ctx);
 
+
   for (var i = 0; i < times.length; i++) {
-    drawHistogramBar(ctx, names, times);
+    drawHistogramBar(ctx, names[i], times[i], times, i);
   }
 };
