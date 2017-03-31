@@ -27,9 +27,7 @@ var drawHistogramBar = function (ctx, playerName, resultTime, timesCollection, i
 
   var histogramHeight = 150;
   var step = histogramHeight / (calcMaxTime(timesCollection) - 0);
-//  var step = 1;
   var indent = 50;
-//  var positionX = 210 + indent * i;
   var positionX = 210 + indent * index;
   var timePositionY = 220 - resultTime * step;
   var barPositionY = histogramHeight - resultTime * step + 100;
