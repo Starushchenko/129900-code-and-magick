@@ -23,10 +23,9 @@ var randomOpacity = function (min, max) {
   return Math.random() * (max - min) + min;
 };
 
-var drawHistogramBar = function (ctx, playerName, resultTime, timesCollection, index) {
+var drawHistogramBar = function (ctx, playerName, resultTime, step, index) {
 
   var histogramHeight = 150;
-  var step = histogramHeight / (calcMaxTime(timesCollection) - 0);
   var indent = 50;
   var positionX = 210 + indent * index;
   var timePositionY = 220 - resultTime * step;
@@ -50,7 +49,9 @@ window.renderStatistics = function (ctx, names, times) {
   drawCloud(ctx);
   drawText(ctx);
 
+  var step = 150 / calcMaxTime(times);
+
   for (var i = 0; i < times.length; i++) {
-    drawHistogramBar(ctx, names[i], times[i], times, i);
+    drawHistogramBar(ctx, names[i], times[i], step, i);
   }
 };
